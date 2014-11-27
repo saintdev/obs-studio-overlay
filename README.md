@@ -14,8 +14,9 @@ ln -s <path to overlay>/Documentation/package.unmask/obs-studio \
 /etc/portage/package.unmask/obs-studio
 ```
 
-Only a live ebuild is available for obs-studio, so you will also need to add
-it to package.keywords.
+If you would prefer to use the live ebuild instead of the release. You will
+need to add obs-studio to your ACCEPT_KEYWORDS. A file you can symlink is
+provided.
 
 ```
 ln -s <path to overlay>/Documentation/package.keywords/obs-studio-live \
