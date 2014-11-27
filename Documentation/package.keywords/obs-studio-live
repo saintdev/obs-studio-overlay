@@ -1,0 +1,2 @@
+# Make obs-studio always visible.
+=media-video/obs-studio-9999::obs-studio **
