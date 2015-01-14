@@ -11,6 +11,7 @@ if [[ ${PV} == 9999 ]]; then
 else
 	KEYWORDS="~x86 ~amd64"
 	SRC_URI="https://github.com/jp9000/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	RESTRICT="primaryuri"
 fi
 
 
