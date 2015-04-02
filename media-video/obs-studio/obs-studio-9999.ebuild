@@ -20,7 +20,7 @@ HOMEPAGE="https://obsproject.com"
 LICENSE="GPL-2"
 
 SLOT="0"
-IUSE="fdk imagemagick +pulseaudio +qt5 truetype v4l"
+IUSE="fdk imagemagick jack +pulseaudio +qt5 truetype v4l"
 
 DEPEND=">=dev-libs/jansson-2.5
 	media-libs/x264
@@ -30,6 +30,7 @@ DEPEND=">=dev-libs/jansson-2.5
 	x11-libs/libXrandr
 	fdk? ( media-libs/fdk-aac )
 	imagemagick? ( media-gfx/imagemagick )
+	jack? ( media-sound/jack-audio-connection-kit )
 	pulseaudio? ( media-sound/pulseaudio )
 	qt5? (
 		dev-qt/qtcore:5
@@ -61,6 +62,7 @@ src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_disable fdk LIBFDK)
 		$(cmake-utils_use imagemagick LIBOBS_PREFER_IMAGEMAGICK)
+		$(cmake-utils_use_disable jack JACK)
 		$(cmake-utils_use_disable pulseaudio PULSEAUDIO)
 		$(cmake-utils_use_enable qt5 UI)
 		$(cmake-utils_use_disable qt5 UI)
@@ -73,7 +75,8 @@ src_configure() {
 }
 
 pkg_postinst() {
-	if ! use pulseaudio; then
-		ewarn "Without PulseAudio, you will not have audio capture capability."
+	if ! use pulseaudio && ! use jack; then
+		ewarn "It is suggested you enable either JACK or PulseAudio,"
+		ewarn "or you will not have audio capture capability."
 	fi
 }
