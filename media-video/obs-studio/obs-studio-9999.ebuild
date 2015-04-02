@@ -59,13 +59,13 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_find_package fdk Libfdk)
+		$(cmake-utils_use_disable fdk LIBFDK)
 		$(cmake-utils_use imagemagick LIBOBS_PREFER_IMAGEMAGICK)
-		$(cmake-utils_use_find_package pulseaudio PulseAudio)
+		$(cmake-utils_use_disable pulseaudio PULSEAUDIO)
 		$(cmake-utils_use_enable qt5 UI)
 		$(cmake-utils_use_disable qt5 UI)
-		$(cmake-utils_use_find_package truetype Freetype)
-		$(cmake-utils_use_find_package v4l Libv4l2)
+		$(cmake-utils_use_disable truetype FREETYPE)
+		$(cmake-utils_use_disable v4l V4L2)
 		-DUNIX_STRUCTURE=1
 	)
 
