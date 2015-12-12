@@ -6,6 +6,7 @@ inherit eutils cmake-utils
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
+	KEYWORDS=""
 	EGIT_REPO_URI="https://github.com/jp9000/obs-studio.git
 		git://github.com/jp9000/obs-studio.git"
 else
