@@ -59,6 +59,7 @@ src_prepare() {
 }
 
 src_configure() {
+	local libdir=$(get_libdir)
 	local mycmakeargs=(
 		$(cmake-utils_use_disable fdk LIBFDK)
 		$(cmake-utils_use imagemagick LIBOBS_PREFER_IMAGEMAGICK)
@@ -68,6 +69,7 @@ src_configure() {
 		$(cmake-utils_use_disable truetype FREETYPE)
 		$(cmake-utils_use_disable v4l V4L2)
 		-DUNIX_STRUCTURE=1
+		-DOBS_MULTIARCH_SUFFIX=${libdir#lib}
 	)
 
 	cmake-utils_src_configure
