@@ -1,8 +1,8 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-EAPI=5
-inherit eutils cmake-utils multilib
+EAPI=6
+inherit eutils cmake-utils
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
@@ -62,14 +62,14 @@ src_prepare() {
 src_configure() {
 	local libdir=$(get_libdir)
 	local mycmakeargs=(
-		$(cmake-utils_use_disable fdk LIBFDK)
-		$(cmake-utils_use imagemagick LIBOBS_PREFER_IMAGEMAGICK)
-		$(cmake-utils_use_disable jack JACK)
-		$(cmake-utils_use_disable pulseaudio PULSEAUDIO)
-		$(cmake-utils_use_enable qt5 UI)
-		$(cmake-utils_use_disable qt5 UI)
-		$(cmake-utils_use_disable truetype FREETYPE)
-		$(cmake-utils_use_disable v4l V4L2)
+		-DDISABLE_LIBFDK="$(usex fdk no yes)"
+		-DLIBOBS_PREFER_IMAGEMAGICK="$(usex imagemagick)"
+		-DDISABLE_JACK="$(usex jack no yes)"
+		-DDISABLE_PULSEAUDIO="$(usex pulseaudio no yes)"
+		-DENABLE_UI="$(usex qt5)"
+		-DDISABLE_UI="$(usex qt5 no yes)"
+		-DDISABLE_FREETYPE="$(usex truetype no yes)"
+		-DDISABLE_V4L2="$(usex v4l no yes)"
 		-DUNIX_STRUCTURE=1
 		-DOBS_MULTIARCH_SUFFIX=${libdir#lib}
 	)
