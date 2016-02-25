@@ -31,7 +31,7 @@ DEPEND=">=dev-libs/jansson-2.5
 	x11-libs/libXrandr
 	fdk? ( media-libs/fdk-aac )
 	imagemagick? ( media-gfx/imagemagick )
-	jack? ( media-sound/jack-audio-connection-kit )
+	jack? ( virtual/jack )
 	pulseaudio? ( media-sound/pulseaudio )
 	qt5? (
 		dev-qt/qtcore:5
